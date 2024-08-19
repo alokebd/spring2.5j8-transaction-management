@@ -19,15 +19,14 @@
 ## Start application (maven/IDE)
 - Install the necessary project dependencies:$ ./mvnw install
 - To run the Application from the Command Line: $ ./mvnw clean spring-boot:run
-- To build a deployable war file for local development, if preferred:$ ./mvnw clean package
+- To build a deployable jar file for local development, if preferred:$ ./mvnw clean package
 
 ## Swagger
-- The application has swagger 2 integrated. Access the swagger at
-
+- The application has swagger 2 integrated. Access the swagger:
 -[Swagger Local URL](http://localhost:9091/swagger-ui.html)
 
 
-- Call API (http://localhost:9091/service/accounts) to add feew accounts or update DB (supplied SQL).
+- Call API (http://localhost:9091/service/accounts) to add few accounts or update DB (supplied SQL).
 ```SQL:title=data.sql
 INSERT INTO account_info (id, acct_number, balance, name, rate)
 VALUES (1, 11111, 200,  'Alex', 0.035);
@@ -186,16 +185,7 @@ Following are propagation levels:
 
 # Implementing declarative transaction management
 * Without proxy: The method is invoked directly on that object reference
-* With proxy
-
-- When a proxy is used and you invoke a method transferMoney on an object reference, the method is no longer invoked directly on that object reference, but instead on a reference to the proxy.
-
-```java:title=java
-AccountService accountService = (AccountService) applicationContext.getBean(AccountService.class);
-String accountServiceClassName = accountService.getClass().getName();
-logger.info(accountServiceClassName);
-```
-- The default advice mode for processing `@Transactional` annotations is proxy.
+* With proxy: The default advice mode for processing `@Transactional` annotations is proxy.
 
 * To summarize proxy uses
 
@@ -203,7 +193,8 @@ logger.info(accountServiceClassName);
 - `Platform transaction manager` that handles transactions.
 
 - At a high level, Spring creates proxies for all the classes annotated with @Transactional – either on the class or on any of the methods. The proxy allows the framework to inject transactional logic before and after the running method – mainly for starting and committing the transaction.
-- 4 Components interacting with each other are used by spring to handle your trans.:
+
+- 4 Components interacting with each other are used by spring to handle transaction:
 
 - **_`Persistence context proxy`_**
 * The entities live in database are managed by entity manager, it defines methods that are used to interact with persistence context.
@@ -215,7 +206,8 @@ logger.info(accountServiceClassName);
 * The intercept method calls with the annotation Transactional, what i should mention here is the interceptor is called before and after the method is invoked on the object reference (first call before to begin a transaction & second call after to commit changes), it has two main responsabilities, first determines if new trans needed, the other is determines decides when to commit, rollback or left running.
 
 - **_`Transaction manager`_**
-
 * it's an abstraction abstraction, represented in our case by Spring's [platform transcation manager](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/PlatformTransactionManager.html) interface, we are using actually the JPA transaction manager that provide essential methods for controlling trans operations at runtime like begin, commit, rollback.
+
+
 * Spring recommends that you only annotate concrete classes.
 
