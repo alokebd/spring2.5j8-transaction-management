@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "167dcf61-6274-45f2-8508-691ea3b3ef4c",
+		"name": "Spring2.5-JAP-Transaction-Management",
+		"description": "Check all APIs in Swagger:\n\n[http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33936986"
+	},
+	"item": [
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"acctNumber\": 22222,\r\n  \"balance\":200,\r\n  \"name\": \"James\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/services/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"services",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all accounts (Declarative call)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/services/declarative/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"services",
+						"declarative",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Declarative Account Transfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 100,\r\n  \"currency_code\": 840,\r\n  \"from\": {\r\n    \"acctNumber\": 11111,\r\n    \"balance\": 200,\r\n    \"id\": 1,\r\n    \"last_operation\": \"\",\r\n    \"name\": \"Alex\"\r\n  },\r\n  \"to\": {\r\n    \"acctNumber\": 22222,\r\n    \"balance\": 200,\r\n    \"id\": 2,\r\n    \"last_operation\": \"\",\r\n    \"name\": \"James\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/services/declarative/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"services",
+						"declarative",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Programmatic Account Transfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 75.25,\r\n  \"currency_code\": 840,\r\n  \"from\": {\r\n    \"acctNumber\": 22222,\r\n    \"balance\": 300,\r\n    \"id\": 2,\r\n    \"last_operation\": \"\",\r\n    \"name\": \"James\"\r\n  },\r\n  \"to\": {\r\n    \"acctNumber\": 1111,\r\n    \"balance\": 95.0,\r\n    \"id\": 2,\r\n    \"last_operation\": \"\",\r\n    \"name\": \"Alex\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/services/programmatic/trxmanager/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"services",
+						"programmatic",
+						"trxmanager",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all accounts (Programmatic call)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/services/programmatic/trxtemplate/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"services",
+						"programmatic",
+						"trxtemplate",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
