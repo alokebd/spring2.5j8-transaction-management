@@ -18,10 +18,10 @@ public class GlobalExceptionHandler {
     }
 	
 	@ExceptionHandler(InvalidAmount.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<ErrorResponse> handleInvalidAmountException(InvalidAmount exception) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage()));
+		return ResponseEntity.status(HttpStatus.CONFLICT)
+				.body(new ErrorResponse(HttpStatus.CONFLICT.value(), exception.getMessage()));
     }
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
